@@ -33,6 +33,10 @@ The Dockerfile will need to be edited to refer to the client version you have do
 
 `docker build --tag cphtestp .`
 
+If you're building on IBM Power you can specify the architecture using the appropriate build-arg:
+
+`docker build --build-arg ARCH=ppc64el --tag cphtestp .`
+
 then run in network host mode to connect and run tests against a local QM:
 
 `docker run -it --detach --net="host" cphtestp`

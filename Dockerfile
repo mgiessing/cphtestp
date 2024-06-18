@@ -13,7 +13,8 @@
 # limitations under the License.
 
 FROM ubuntu:22.04
-
+ARG ARCH="amd64"
+ARG MQ_VER="9.3.2.0"
 LABEL maintainer "Sam Massey <smassey@uk.ibm.com>"
 
 COPY *.deb /
@@ -70,9 +71,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 RUN export DEBIAN_FRONTEND=noninteractive \
   && ./mqlicense.sh -accept \
-  && dpkg -i ibmmq-runtime_9.3.2.0_amd64.deb \
-  && dpkg -i ibmmq-gskit_9.3.2.0_amd64.deb \
-  && dpkg -i ibmmq-client_9.3.2.0_amd64.deb \
+  && dpkg -i ibmmq-runtime_${MQ_VER}_${ARCH}.deb \
+  && dpkg -i ibmmq-gskit_${MQ_VER}_${ARCH}.deb \
+  && dpkg -i ibmmq-client_${MQ_VER}_${ARCH}.deb \
   && chown -R mqperf:root /opt/mqm/* \
   && chown -R mqperf:root /var/mqm/* \
   && chmod o+w /var/mqm
@@ -81,7 +82,9 @@ COPY cph/* /home/mqperf/cph/
 COPY ssl/* /opt/mqm/ssl/
 COPY *.sh /home/mqperf/cph/
 COPY *.mqsc /home/mqperf/cph/
-COPY qmmonitor2 /home/mqperf/cph/
+COPY qmmonitor2.${ARCH} /home/mqperf/cph/qmmonitor2
+RUN cp /home/mqperf/cph/cph.${ARCH} /home/mqperf/cph/cph
+
 USER mqperf
 WORKDIR /home/mqperf/cph
 

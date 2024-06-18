@@ -83,7 +83,6 @@ COPY ssl/* /opt/mqm/ssl/
 COPY *.sh /home/mqperf/cph/
 COPY *.mqsc /home/mqperf/cph/
 COPY qmmonitor2.${ARCH} /home/mqperf/cph/qmmonitor2
-RUN cp /home/mqperf/cph/cph.${ARCH} /home/mqperf/cph/cph
 
 USER mqperf
 WORKDIR /home/mqperf/cph

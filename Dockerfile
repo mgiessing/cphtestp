@@ -80,6 +80,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 COPY cph/* /home/mqperf/cph/
 COPY ssl/* /opt/mqm/ssl/
+RUN chown -R mqperf:mqm /opt/mqm/ssl/
 COPY *.sh /home/mqperf/cph/
 COPY *.mqsc /home/mqperf/cph/
 COPY qmmonitor2.${ARCH} /home/mqperf/cph/qmmonitor2

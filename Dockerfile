@@ -84,6 +84,7 @@ RUN chown -R mqperf:mqm /opt/mqm/ssl/
 COPY *.sh /home/mqperf/cph/
 COPY *.mqsc /home/mqperf/cph/
 COPY qmmonitor2.${ARCH} /home/mqperf/cph/qmmonitor2
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/mqm/lib64
 
 USER mqperf
 WORKDIR /home/mqperf/cph
